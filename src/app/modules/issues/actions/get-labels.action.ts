@@ -1,14 +1,24 @@
 import { sleep } from "@helpers/sleep";
 import { GithubLabel } from "../interfaces";
+import { environment } from "src/environments/environment.development";
+
+const BASE_URL = environment.baseUrl;
+const GITHUB_TOKEN = environment.gitHubToken;
 
 export const getLabels = async(): Promise<GithubLabel[]> => {
 
-    await sleep(2000);
+    await sleep(1500);
 
-    const url = "https://api.github.com/repos/angular/angular/labels"
 
     try {
-        const resp = await fetch(url);
+        const resp = await fetch(
+            `${ BASE_URL }/labels`,
+            {
+                headers: {
+                    Authorization: `Bearer ${  GITHUB_TOKEN }`
+                }
+            }
+        );
 
         if (!resp.ok) throw "Cant Load Labels";
 

@@ -14,11 +14,16 @@
 
     <!-- List -->
      <div class="mt-4 flex flex-col">
-        <h2>ISSUES</h2>
         <!-- TODO: List <app-issue-list></app-issue-list> -->
-        <a routerLink="/issue/123" routerLinkActive="router-link-active">
-            Ir a 123
-        </a>
+        @for (issue of issuesQuery.data(); track $index) {
+            <issue-item [issue]="issue" />
+        } @empty {
+            @if (issuesQuery.isLoading()) {
+                <p>Loading...</p>
+            } @else {
+                <p>No issues found</p>
+            }
+        }
         <!-- TODO: loader -->
 
         <!-- TODO: No Issues -->
@@ -26,8 +31,12 @@
 
      <!-- LABELS -->
      <div class="mt-4 flex flex-col">
-        <h2>Labels</h2>
         <!-- TODO SPINNER -->
+        @if (labelsQuery.isLoading()) {
+            <p>Loading...</p>
+        }@else {
+            <issues-labels-selector [labels]="labelsQuery.data() ?? []" />
+        }
 
         <!-- TODO: LABEL SELECTOR -->
      </div>

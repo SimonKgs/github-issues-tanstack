@@ -1,0 +1,15 @@
+<div class="flex flex-wrap justify-center gap-2">
+
+    @for (label of labels(); track $index) {
+        <div 
+            class="border p-2 rounded-md hover:bg-slate-950 cursor-pointer"
+            [ngStyle]="{ 'border-color': '#' + label.color}"
+        >
+            {{ label.name }}
+        </div>
+    } @empty {
+        <div>
+            <p>No labels found</p>
+        </div>
+    }
+</div>
