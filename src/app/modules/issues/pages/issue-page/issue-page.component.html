@@ -1,1 +1,8 @@
-<h1>Issue number: 123</h1>
+<h1>Issue number: {{ issueNumber()}}</h1>
+<a routerLink="/issues">Back to issues</a>
+
+@if(issueQuery.data() === undefined) {
+    <p>Loading issue...</p>
+} @else {
+    <issue-comment [issue]="issueQuery.data()!"/>
+}
