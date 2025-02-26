@@ -1,6 +1,7 @@
 import { getIssues } from '@actions/get-issues.action';
 import { getLabels } from '@actions/get-labels.action';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { State } from '@interfaces/github-issue.interface';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 
 
@@ -9,16 +10,22 @@ import { injectQuery } from '@tanstack/angular-query-experimental';
 })
 export class IssuesService {
 
+  selectedState = signal<State>(State.All);
+
   public labelsQuery = injectQuery(() => ({
     queryKey: ['labels'],
     queryFn: () => getLabels(),
   }));
 
   public issuesQuery = injectQuery(() => ({
-    queryKey: ['issues'],
-    queryFn: () => getIssues(),
+    queryKey: ['issues', this.selectedState()],
+    queryFn: () => getIssues( this.selectedState() ),
   }));
   
+
+  showIssuesByState(state: State) {
+    this.selectedState.set(state);
+  }
 
 
 }

@@ -16,6 +16,7 @@ export default class IssuePageComponent implements OnInit{
   private issueService = inject(IssueService)
   public issueNumber = computed(() => this.route.snapshot.paramMap.get('number'))
   public issueQuery = this.issueService.issueQuery
+  public issueCommentsQuey = this.issueService.issueCommentsQuery
   // two alternatives
   // this will get the value from the url param, after add withComponentInputBinding on config file
   // public number = input.required<string>()

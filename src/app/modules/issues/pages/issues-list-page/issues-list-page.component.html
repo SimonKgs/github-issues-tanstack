@@ -6,9 +6,27 @@
     <!-- buttons to control the state -->
     <div class="col-span-3 flex flex-col">
         <div class="flex gap-2">
-            <button class="btn active cursor-pointer">All</button>
-            <button class="btn cursor-pointer">Open</button>
-            <button class="btn cursor-pointer">Close</button>
+            <button 
+                [class.active]="currentState() === 'all'" 
+                class="btn cursor-pointer"
+                (click)="onChangeState('all')"
+            >
+            All
+        </button>
+            <button 
+                [class.active]="currentState() === 'open'" 
+                class="btn cursor-pointer"
+                (click)="onChangeState('open')"
+            >
+            Open
+        </button>
+            <button 
+                [class.active]="currentState() === 'closed'" 
+                class="btn cursor-pointer"
+                (click)="onChangeState('closed')"
+            >
+            Close
+        </button>
         </div>
     </div>
 
