@@ -10,8 +10,6 @@ export const getIssues = async(
     selectedLabels: string[]
 ): Promise<GithubIssue[]> => {
 
-    await sleep(1500);
-
     const params = new URLSearchParams();
     params.append('state', state);
 
@@ -33,9 +31,6 @@ export const getIssues = async(
         if (!resp.ok) throw "Cant Load Issues";
 
         const issues: GithubIssue[] = await resp.json();
-        console.log({issues});
-        
-
         return issues;
         
     } catch (error) {

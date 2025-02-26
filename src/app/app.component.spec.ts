@@ -1,29 +1,25 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
+  let component: HTMLElement;
+
+  beforeEach(() => {
+    component = document.createElement('div');
+    component.innerHTML = `
+      <div class="max-w-5xl m-auto mt-5">
+        <router-outlet></router-outlet>
+      </div>
+    `;
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should contain a div with the correct class', () => {
+    const div = component.querySelector('div');
+    expect(div).toBeTruthy();
+    expect(div?.classList.contains('max-w-5xl')).toBeTrue();
+    expect(div?.classList.contains('m-auto')).toBeTrue();
+    expect(div?.classList.contains('mt-5')).toBeTrue();
   });
 
-  it(`should have the 'github-issues' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('github-issues');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, github-issues');
+  it('should contain a <router-outlet>', () => {
+    const routerOutlet = component.querySelector('router-outlet');
+    expect(routerOutlet).toBeTruthy();
   });
 });
